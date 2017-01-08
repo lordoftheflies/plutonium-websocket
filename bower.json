@@ -1,8 +1,8 @@
 {
-  "name": "ws-element",
-  "version": "0.1.0",
+  "name": "plutonium-websocket",
+  "version": "0.0.1",
   "authors": [
-    "Marwan Aziz <aziz.marwan@gmail.com>"
+    "lordoftheflies <heglas11@gmail.com>"
   ],
   "description": "Polymer custom element that facilitates communication via browser-native websockets",
   "license": "MIT",
