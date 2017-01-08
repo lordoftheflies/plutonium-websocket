@@ -1,17 +1,26 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<dom-module id="plutonium-websocket">
-    <style>
-        :host {
-            display: none;
-        }
-    </style>
-    <template></template>
-</dom-module>
+<link rel="import" href="../polymer/polymer.html">
 
-<script type="text/javascript">
-    (function () {
+<!--
+`plutonium-websocket`
+Websocket Polymer.
+
+@demo demo/index.html 
+-->
+
+<dom-module id="plutonium-websocket">
+    <template>
+        <style>
+            :host {
+                display: none;
+            }
+        </style>
+    </template>
+
+    <script>
         Polymer({
-            is: "plutonium-websocket",
+
+            is: 'plutonium-websocket',
+
             socket: null,
             properties: {
                 protocol: {
@@ -45,6 +54,7 @@
             close: function () {
                 this.socket.close();
             }
-        })
-    })();
-</script>
+
+        });
+    </script>
+</dom-module>
