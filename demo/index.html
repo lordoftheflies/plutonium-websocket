@@ -20,16 +20,35 @@
             <h3>Basic plutonium-websocket demo</h3>
             <demo-snippet>
                 <template>
-                    <plutonium-element url="ws://localhost:8080/hedgehog-visualization-ms-0.0.1-SNAPSHOT/data" protocol="echo-protocol"></plutonium-element>
+                    <plutonium-websocket url="ws://localhost:8080/hedgehog-visualization-ms-0.0.1-SNAPSHOT/data"></plutonium-websocket>
                     <script>
-                        var wsElement = document.querySelector("ws-element");
+                        console.log('Initialize demo');
+                        var wsElement = document.querySelector("plutonium-websocket");
                         wsElement.addEventListener('onerror', function (error) {
+                            console.log('Ws throw error');
                             throw new Error(error);
                         });
                         wsElement.addEventListener('onopen', function () {
+                            console.log('Ws send');
                             wsElement.send('Hello from client');
                         });
                         wsElement.addEventListener('onmessage', function (message) {
+                            console.log('Ws message');
+                            
+                            // hello from the server
+                            console.log(message.detail);
+                        });
+                        wsElement.addEventListener('ws-error', function (error) {
+                            console.log('Ws throw error');
+                            throw new Error(error);
+                        });
+                        wsElement.addEventListener('ws-open', function () {
+                            console.log('Ws send');
+                            wsElement.send('Hello from client');
+                        });
+                        wsElement.addEventListener('ws-message', function (message) {
+                            console.log('Ws message');
+                            
                             // hello from the server
                             console.log(message.detail);
                         });
