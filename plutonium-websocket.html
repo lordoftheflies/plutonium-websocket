@@ -50,12 +50,15 @@ Websocket Polymer.
             },
 
             onError: function (error) {
+                console.debug((this.id ? this.is + '#' + this.id : this.is), 'error', error);
                 this.fire('ws-error', error);
             },
             onOpen: function (event) {
+                console.debug((this.id ? this.is + '#' + this.id : this.is), 'open');
                 this.fire('ws-open');
             },
             onMessage: function (event) {
+                console.debug((this.id ? this.is + '#' + this.id : this.is), 'message', event.data);
                 this.fire('ws-message', event.data);
             },
             onSend: function (event, details) {
@@ -66,6 +69,7 @@ Websocket Polymer.
                 this.socket.send(message);
             },
             close: function () {
+                console.debug((this.id ? this.is + '#' + this.id : this.is), 'close');
                 this.socket.close();
             }
 
