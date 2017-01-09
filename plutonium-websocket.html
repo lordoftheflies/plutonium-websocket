@@ -32,7 +32,12 @@ Websocket Polymer.
                 autoClose: {
                     type: Boolean,
                     notify: true,
-                    value: true
+                    value: false
+                },
+                asJson: {
+                    type: Boolean,
+                    notify: true,
+                    valure: false
                 }
             },
             listeners: {
@@ -59,7 +64,7 @@ Websocket Polymer.
             },
             onMessage: function (event) {
                 console.debug((this.id ? this.is + '#' + this.id : this.is), 'message', event.data);
-                this.fire('ws-message', event.data);
+                this.fire('ws-message', (this.asJson) ? JSON.parse(event.data) : event.data);
             },
             onSend: function (event, details) {
                 this.send(details.message);
