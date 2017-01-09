@@ -1,0 +1,74 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`plutonium-websocket`
+Websocket Polymer.
+
+@demo demo/index.html 
+-->
+
+<dom-module id="plutonium-websocket">
+    <template>
+        <style>
+            :host {
+                display: none;
+            }
+        </style>
+    </template>
+
+    <script>
+        Polymer({
+
+            is: 'plutonium-websocket',
+
+            socket: null,
+            properties: {
+                protocol: {
+                    type: String
+                },
+                url: {
+                    type: String
+                },
+                autoClose: {
+                    type: Boolean,
+                    notify: true,
+                    value: true
+                }
+            },
+            listeners: {
+                'ws-send': 'onSend'
+            },
+            ready: function () {
+                this.socket = new WebSocket(this.url, this.protocol);
+                this.socket.onerror = this.onError.bind(this);
+                this.socket.onopen = this.onOpen.bind(this);
+                this.socket.onmessage = this.onMessage.bind(this);
+            },
+            detached: function () {
+                if (this.autoClose)
+                    this.close();
+            },
+
+            onError: function (error) {
+                this.fire('ws-error', error);
+            },
+            onOpen: function (event) {
+                this.fire('ws-open');
+            },
+            onMessage: function (event) {
+                this.fire('ws-message', event.data);
+            },
+            onSend: function (event, details) {
+                this.send(details.message);
+            },
+
+            send: function (message) {
+                this.socket.send(message);
+            },
+            close: function () {
+                this.socket.close();
+            }
+
+        });
+    </script>
+</dom-module>

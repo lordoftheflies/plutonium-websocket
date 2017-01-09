@@ -1,0 +1,35 @@
+{
+  "name": "plutonium-websocket",
+  "authors": [
+    "lordoftheflies <heglas11@gmail.com>"
+  ],
+  "description": "Polymer custom element that facilitates communication via browser-native websockets",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "homepage": "https://github.com/lordoftheflies/plutonium-websocket",
+  "_release": "848a2c663a",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "848a2c663a141e965c833cbcc2ea8b49c955564d"
+  },
+  "_source": "https://github.com/lordoftheflies/plutonium-websocket.git",
+  "_target": "master",
+  "_originalSource": "lordoftheflies/plutonium-websocket",
+  "_direct": true
+}

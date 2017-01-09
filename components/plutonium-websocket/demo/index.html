@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+        <title>plutonium-websocket demo</title>
+
+        <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+        <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+        <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+        <link rel="import" href="../plutonium-websocket.html">
+
+        <style is="custom-style" include="demo-pages-shared-styles">
+        </style>
+    </head>
+    <body>
+        <div class="vertical-section-container centered">
+            <h3>Basic plutonium-websocket demo</h3>
+            <demo-snippet>
+                <template>
+                    <plutonium-websocket url="ws://localhost:8080/hedgehog-visualization-ms-0.0.1-SNAPSHOT/data"></plutonium-websocket>
+                    <script>
+                        console.log('Initialize demo');
+                        var wsElement = document.querySelector("plutonium-websocket");
+                        wsElement.addEventListener('onerror', function (error) {
+                            console.log('Ws throw error');
+                            throw new Error(error);
+                        });
+                        wsElement.addEventListener('onopen', function () {
+                            console.log('Ws send');
+                            wsElement.send('Hello from client');
+                        });
+                        wsElement.addEventListener('onmessage', function (message) {
+                            console.log('Ws message');
+                            
+                            // hello from the server
+                            console.log(message.detail);
+                        });
+                        wsElement.addEventListener('ws-error', function (error) {
+                            console.log('Ws throw error');
+                            throw new Error(error);
+                        });
+                        wsElement.addEventListener('ws-open', function () {
+                            console.log('Ws send');
+                            wsElement.send('Hello from client');
+                        });
+                        wsElement.addEventListener('ws-message', function (message) {
+                            console.log('Ws message');
+                            
+                            // hello from the server
+                            console.log(message.detail);
+                        });
+                    </script>
+                </template>
+            </demo-snippet>
+        </div>
+    </body>
+</html>
