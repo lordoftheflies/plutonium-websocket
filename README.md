@@ -1,9 +1,8 @@
-# ws-element
-Wrapper for browser-native WebSocket client. It's built using the Polymer project.
+# plutonium-websocket
 
+Wrapper for browser-native WebSocket client. It's built using the Polymer 1.0.
 
 ## Usage
-
 
 1. Import Web Components' polyfill:
 
@@ -14,13 +13,13 @@ Wrapper for browser-native WebSocket client. It's built using the Polymer projec
 2. Import Custom Element:
 
     ```html
-    <link rel="import" href="src/ws-element.html">
+    <link rel="import" href="bower_components/plutonium-websocket/plutonium-websocket.html">
     ```
 
 3. Start using it!
 
     ```html
-    <ws-element url="ws://localhost:9999" protocol="echo-protocol"></ws-element>
+    <plutonium-websocket url="ws://{host}:{port}" protocol="{sub-protocols}"></plutonium-websocket>
     ```
 
 ## Options
@@ -41,6 +40,6 @@ Method        | Parameters   | Returns     | Description
 
 Event         | Description
 ---           | ---
-`onmessage` | Triggers when a message from the server is received.
-`onerror` | Triggers when there is an error triggered by WebSocket client
-`onopen` | Triggers when a socket is first open
+`ws-message` | Triggers when a message from the server is received.
+`ws-error` | Triggers when there is an error triggered by WebSocket client
+`ws-open` | Triggers when a socket is first open
