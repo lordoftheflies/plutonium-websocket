@@ -93,7 +93,7 @@ Websocket Polymer.
             },
             close: function () {
                 console.debug((this.id ? this.is + '#' + this.id : this.is), 'close');
-                this.socket.close();
+                if (this.socket) this.socket.close();
             }
 
         });
