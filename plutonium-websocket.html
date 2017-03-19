@@ -29,6 +29,11 @@ Websocket Polymer.
                 url: {
                     type: String
                 },
+                autoStart: {
+                    type: Boolean,
+                    notify: true,
+                    value: false
+                },
                 autoClose: {
                     type: Boolean,
                     notify: true,
@@ -49,13 +54,21 @@ Websocket Polymer.
                 'ws-send': 'onSend'
             },
             observers: [
-             //   '_observeHeaders(headers, url)'
+                '_observeSocket(url, protocol)'
             ],
-            ready: function () {
-                this.socket = new WebSocket(this.url, this.protocol);
+            _observeSocket: function (url, protocol) {
+                if (this.socket) {
+                    this.close();
+                }
+                this.socket = new WebSocket(url, protocol);
                 this.socket.onerror = this.onError.bind(this);
                 this.socket.onopen = this.onOpen.bind(this);
                 this.socket.onmessage = this.onMessage.bind(this);
+            },
+            attached: function() {
+                if (this.autoStart) {
+                    this._observeSocket(this.url, this.protocol);
+                }
             },
             detached: function () {
                 if (this.autoClose)
