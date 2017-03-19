@@ -49,7 +49,7 @@ Websocket Polymer.
                 'ws-send': 'onSend'
             },
             observers: [
-                '_observeHeaders(headers, url)'
+             //   '_observeHeaders(headers, url)'
             ],
             ready: function () {
                 this.socket = new WebSocket(this.url, this.protocol);
@@ -62,15 +62,15 @@ Websocket Polymer.
                     this.close();
             },
 
-            _observeHeaders: function(headers, url) {
-                this.close();
-                this.socket = new WebSocket(url, {
-                    headers: headers
-                });
-                this.socket.onerror = this.onError.bind(this);
-                this.socket.onopen = this.onOpen.bind(this);
-                this.socket.onmessage = this.onMessage.bind(this);
-            },
+           // _observeHeaders: function(headers, url) {
+           //     this.close();
+           //     this.socket = new WebSocket(url, {
+           //         headers: headers
+           //     });
+           //     this.socket.onerror = this.onError.bind(this);
+           //     this.socket.onopen = this.onOpen.bind(this);
+           //     this.socket.onmessage = this.onMessage.bind(this);
+           // },
             
             onError: function (error) {
                 console.debug((this.id ? this.is + '#' + this.id : this.is), 'error', error);
