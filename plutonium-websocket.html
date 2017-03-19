@@ -24,10 +24,12 @@ Websocket Polymer.
             socket: null,
             properties: {
                 protocol: {
-                    type: String
+                    type: String,
+                    notify: true
                 },
                 url: {
-                    type: String
+                    type: String,
+                    notify: true
                 },
                 autoStart: {
                     type: Boolean,
