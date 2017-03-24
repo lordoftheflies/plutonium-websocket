@@ -42,6 +42,14 @@ Websocket Polymer.
                     notify: true,
                     value: false
                 },
+                successMessage: {
+                    type: String,
+                    value: 'Websocket connection established.'
+                },
+                errorMessage: {
+                    type: String,
+                    value: 'An error occured in websocket exception.'
+                },
                 asJson: {
                     type: Boolean,
                     notify: true,
@@ -68,12 +76,16 @@ Websocket Polymer.
                     this.socket.onerror = this.onError.bind(this);
                     this.socket.onopen = this.onOpen.bind(this);
                     this.socket.onmessage = this.onMessage.bind(this);
+                    this.fire('plutonium-log', {
+                        target: this.id,
+                        message: this.successMessage
+                    });
                 } catch (err) {
                     this.fire('plutonium-error', {
                         target: this.id,
+                        message: this.errorMessage
                         error: err
                     });
-                    console.warn((this.id ? (this.is + '#' + this.id) : this.is), 'websocket failed to create', err);
                 }
             },
             attached: function () {
