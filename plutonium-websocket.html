@@ -63,12 +63,20 @@ Websocket Polymer.
                 if (this.socket) {
                     this.close();
                 }
-                this.socket = new WebSocket(url);
-                this.socket.onerror = this.onError.bind(this);
-                this.socket.onopen = this.onOpen.bind(this);
-                this.socket.onmessage = this.onMessage.bind(this);
+                try {
+                    this.socket = new WebSocket(url);
+                    this.socket.onerror = this.onError.bind(this);
+                    this.socket.onopen = this.onOpen.bind(this);
+                    this.socket.onmessage = this.onMessage.bind(this);
+                } catch (err) {
+                    this.fire('plutonium-error', {
+                        target: this.id,
+                        error: err
+                    });
+                    console.warn((this.id ? (this.is + '#' + this.id) : this.is), 'websocket failed to create', err);
+                }
             },
-            attached: function() {
+            attached: function () {
                 if (this.autoStart) {
                     this._observeSocket(this.url, this.protocol);
                 }
@@ -78,16 +86,16 @@ Websocket Polymer.
                     this.close();
             },
 
-           // _observeHeaders: function(headers, url) {
-           //     this.close();
-           //     this.socket = new WebSocket(url, {
-           //         headers: headers
-           //     });
-           //     this.socket.onerror = this.onError.bind(this);
-           //     this.socket.onopen = this.onOpen.bind(this);
-           //     this.socket.onmessage = this.onMessage.bind(this);
-           // },
-            
+            // _observeHeaders: function(headers, url) {
+            //     this.close();
+            //     this.socket = new WebSocket(url, {
+            //         headers: headers
+            //     });
+            //     this.socket.onerror = this.onError.bind(this);
+            //     this.socket.onopen = this.onOpen.bind(this);
+            //     this.socket.onmessage = this.onMessage.bind(this);
+            // },
+
             onError: function (error) {
                 console.debug((this.id ? this.is + '#' + this.id : this.is), 'error', error);
                 this.fire('ws-error', error);
@@ -109,7 +117,8 @@ Websocket Polymer.
             },
             close: function () {
                 console.debug((this.id ? this.is + '#' + this.id : this.is), 'close');
-                if (this.socket) this.socket.close();
+                if (this.socket)
+                    this.socket.close();
             }
 
         });
