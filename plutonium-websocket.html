@@ -68,24 +68,29 @@ Websocket Polymer.
                 '_observeSocket(url)'
             ],
             _observeSocket: function (url) {
-                if (this.socket) {
-                    this.close();
-                }
-                try {
-                    this.socket = new WebSocket(url);
-                    this.socket.onerror = this.onError.bind(this);
-                    this.socket.onopen = this.onOpen.bind(this);
-                    this.socket.onmessage = this.onMessage.bind(this);
-                    this.fire('plutonium-log', {
-                        target: this.id,
-                        message: this.successMessage
-                    });
-                } catch (err) {
-                    this.fire('plutonium-error', {
-                        target: this.id,
-                        message: this.errorMessage,
-                        error: err
-                    });
+                if (url) {
+                    if (this.socket) {
+                        this.close();
+                    }
+                    try {
+                        this.socket = new WebSocket(url);
+                        this.socket.onerror = this.onError.bind(this);
+                        this.socket.onopen = this.onOpen.bind(this);
+                        this.socket.onmessage = this.onMessage.bind(this);
+                        this.fire('plutonium-log', {
+                            target: this.id,
+                            message: this.successMessage
+                        });
+
+                        console.log((this.id ? this.is + '#' + this.id : this.is), 'open websocket for', url);
+                    } catch (err) {
+                        this.fire('plutonium-error', {
+                            target: this.id,
+                            message: this.errorMessage,
+                            error: err
+                        });
+                        this.close();
+                    }
                 }
             },
             attached: function () {
@@ -129,8 +134,10 @@ Websocket Polymer.
             },
             close: function () {
                 console.debug((this.id ? this.is + '#' + this.id : this.is), 'close');
-                if (this.socket)
+                if (this.socket) {
                     this.socket.close();
+                    console.log((this.id ? this.is + '#' + this.id : this.is), 'close websocket for', this.url);
+                }
             }
 
         });
